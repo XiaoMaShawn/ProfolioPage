@@ -24,8 +24,8 @@ const About = () => {
             idx={15}
           />
         </h1>
-        <p>I am good at nothing.</p>
-        <p>I have no idea what to do.</p>
+        <p>I have passionate about coding and good at learning new things.</p>
+        <p>I want to get an opportunity to work as a web developer.</p>
       </div>
 
       <div className='stage-cube-cont'>
