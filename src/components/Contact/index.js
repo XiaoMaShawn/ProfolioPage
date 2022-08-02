@@ -1,16 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Loader from 'react-loaders';
 import AnimatedLetters from '../AnimatedLetters';
 import './index.scss';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
+  const refForm = useRef();
 
   useEffect(() => {
     setTimeout(() => {
       setLetterClass('text-animate-hover')
     }, 3000);
   }, []);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_ozrzm93',
+        'contact_form',
+        refForm.current,
+        'Kk-puJMDomfhXFrSs'
+      )
+      .then(
+        function() {
+          alert('Message successfully sent!');
+          window.location.reload(false);
+        },
+        function(error) {
+          alert('Fail to send the message, please try again');
+          console.log('Error', error);
+        }
+      )
+  }
 
   return (
     <>
@@ -27,7 +51,7 @@ const Contact = () => {
             I'm interested in web developer opportunities - especially entry/junior level. However, if you have other request or questions, don't hesitate to contact me using below from either.
           </p>
           <div className='contact-form'>
-            <form>
+            <form ref={refForm} onSubmit={sendEmail}>
               <ul>
                 <li className='half'>
                   <input type='text' name='name' placeholder='Name' required />
